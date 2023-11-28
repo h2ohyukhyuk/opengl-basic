@@ -1,0 +1,18 @@
+#version 400
+
+layout (location = 0) in vec3 inPos;
+layout (location = 1) in vec3 inCol;
+
+out vec3 vertCol;
+
+uniform mat4 projectionMat44;
+uniform mat4 viewMat44;
+uniform mat4 modelMat44;
+
+void main()
+{
+    vertCol = inCol;
+    vec4 modolPos = modelMat44 * vec4( inPos, 1.0 );
+    vec4 viewPos = viewMat44 * modolPos;
+    gl_Position = projectionMat44 * viewPos;
+}
